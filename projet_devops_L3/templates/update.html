@@ -1,19 +1,25 @@
-
 {% extends 'base.html' %}
 
-{% block title %}Update{% endblock%}
+{% block title %}Update{% endblock %}
 
 {% block content %}
-    <h6 class="text-muted" >Update User: </h6>
-    <form action="/update/{{user.id}}" method="POST">
+    <h6 class="text-muted">Update User:</h6>
+    <form action="/update/{{ user.id }}" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" value="{{user.email}}" class="form-control" id="email" name="email"  >
+            <input type="email" value="{{ user.email }}" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" value="{{user.username}}" class="form-control" id="username" name="username" >
+            <input type="text" value="{{ user.username }}" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+            {% if user.photo %}
+                <img src="{{ url_for('static', filename='uploads/' + user.photo) }}" alt="User Photo" width="50" height="50" class="rounded-circle mt-2">
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-secondary">Update</button>
     </form>
-{% endblock%}
+{% endblock %}
