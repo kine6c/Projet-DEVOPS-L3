@@ -29,3 +29,24 @@ spec:
     - name: mysql-data
       persistentVolumeClaim:
         claimName: mysql-pvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: ton-utilisateur/app-flask:v2  # Remplacez par l'image de votre application Flask
+        ports:
+        - containerPort: 500
