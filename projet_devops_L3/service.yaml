@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-db-service
+spec:
+  selector:
+    app: mysql-db  # Assurez-vous que le label correspond à celui de votre déploiement
+  ports:
+    - protocol: TCP
+      port: 3306       # Le port exposé par le service
+      targetPort: 3306 # Le port où MySQL écoute dans le conteneur
+  type: ClusterIP      # Par défaut, expose le service à l'intérieur du cluster
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  selector:
+    app: flask-app  # Assurez-vous que le label correspond à celui de votre déploiement
+  ports:
+    - protocol: TCP
+      port: 5000       # Le port exposé par le service
+      targetPort: 5000 # Le port où votre application Flask écoute dans le conteneur
+  type: LoadBalancer  # Expose le service avec un IP public dans certains environnements (ex: cloud)
