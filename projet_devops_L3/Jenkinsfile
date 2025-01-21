@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Cloner le code') {
+            steps {
+                git 'https://github.com/kine6c/Projet-DEVOPS-L3.git'
+            }
+        }
+
+        stage('Construire les conteneurs') {
+            steps {
+                script {
+                    sh 'docker-compose build'
+                }
+            }
+        }
+
+        stage('Déployer l\'application') {
+            steps {
+                script {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    }
+}
