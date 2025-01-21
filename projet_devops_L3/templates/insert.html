@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}ADD{% endblock%}
+{% block title %}ADD{% endblock %}
 
 {% block content %}
-    <h6 class="text-muted" >New user</h6>
-    <form method="POST">
+    <h6 class="text-muted">New user</h6>
+    <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email"  >
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" >
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="photo" name="photo">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-{% endblock%}
+{% endblock %}
