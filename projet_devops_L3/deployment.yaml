@@ -25,10 +25,10 @@ spec:
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
-  volumes:
-    - name: mysql-data
-      persistentVolumeClaim:
-        claimName: mysql-pvc
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
 
 ---
 apiVersion: apps/v1
@@ -49,4 +49,4 @@ spec:
       - name: flask-app
         image: ton-utilisateur/app-flask:v2  # Remplacez par l'image de votre application Flask
         ports:
-        - containerPort: 500
+        - containerPort: 5000
