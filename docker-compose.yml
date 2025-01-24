@@ -1,0 +1,41 @@
+version: "3.11"
+
+services:
+  app: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_container
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=db
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  db:
+    image: MySql:15
+    container_name: db_container
+    ports:
+      - "5432:5432"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: app_db
+    volumes:
+      - db_data:/var/lib/sql/data
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge
