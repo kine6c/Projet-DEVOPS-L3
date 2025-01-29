@@ -180,6 +180,7 @@ def inscription():
         email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
+        role = "User"
         confirm_password = request.form.get('confirm_password')
 
         # Validation des champs
@@ -194,7 +195,7 @@ def inscription():
                 flash('Email already exists. Please use a different one.', category='error')
             else:
                 # Créez un nouvel utilisateur
-                new_user = User(email=email, username=username, password=password)
+                new_user = User(email=email, username=username,role=role, password=password)
                 try:
                     db.session.add(new_user)
                     db.session.commit()
